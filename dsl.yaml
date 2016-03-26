@@ -4,7 +4,6 @@ description: ''
 slack: "#cookbook-notifications"
 watch:
   projects:
-    - Job-Dsl
     - junk
   threshold: SUCCESS
 build:
