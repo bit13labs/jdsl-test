@@ -1,4 +1,4 @@
-version: 0.1.{build}
+version: 0.1.{{build}}
 environment: kitchenci
 description: ''
 slack: "#cookbook-notifications"
@@ -11,3 +11,6 @@ build:
   - shell: 'foodcritic -X -f correctness .'
   run:
   - shell: 'kitchen test --destroy always'
+variables:
+  foo: 'bar'
+  blarg: 'frog'
