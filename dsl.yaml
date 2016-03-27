@@ -11,8 +11,8 @@ topic:
 develop:
   build:
     before:
-      - shell: 'git config user.email "savotfsbuild@savogroup.com"'
-      - shell: 'git config user.name "savotfsbuild via jenkins"'
+      - shell: 'git config user.email "jenkins@email.com"'
+      - shell: 'git config user.name "ci via jenkins"'
       - shell: 'bash -ex ~/test-script/versioncheck.sh'
       - shell: 'foodcritic -X spec -f correctness .'
     run:
@@ -28,5 +28,5 @@ master:
       - shell: 'berks install'
     run:
       - shell: 'berks upload --no-ssl-verify'
-      - shell: 'knife ssl fetch https://supermarket.chicago.savogroup.net/'
+      - shell: 'knife ssl fetch https://supermarket.chef.io/'
       - shell: 'knife supermarket share ${JOB_NAME} -o ${WORKSPACE}/..'
