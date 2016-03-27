@@ -7,8 +7,27 @@ slack: "#cookbook-notifications"
 #    - Job-Dsl
 #    - junk
 #  threshold: SUCCESS
-build:
-  before:
-  - shell: 'foodcritic -X -f correctness .'
-  run:
-  - shell: 'kitchen test --destroy always'
+topic:
+  build:
+    before:
+    - shell: 'foodcritic -X -f correctness .'
+    run:
+    - shell: 'kitchen test --destroy always'
+develop:
+  build:
+    before:
+      - shell: 'git config user.email "savotfsbuild@savogroup.com"'
+      - shell: 'git config user.name "savotfsbuild via jenkins"'
+      - shell: 'bash -ex ~/test-script/versioncheck.sh'
+      - shell: 'foodcritic -X spec -f correctness .'
+    run:
+      - shell: 'kitchen test --destroy always'
+master:
+  build:
+    before:
+      - shell: 'knife ssl fetch'
+      - shell: 'berks install'
+    run:
+      - shell: 'berks upload --no-ssl-verify'
+      - shell: 'knife ssl fetch https://supermarket.chicago.savogroup.net/'
+      - shell: 'knife supermarket share ${JOB_NAME} -o ${WORKSPACE}/..'
