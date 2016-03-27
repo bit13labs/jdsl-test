@@ -2,11 +2,6 @@ version: 0.1.{{build}}
 environment: kitchenci
 description: ''
 slack: "#cookbook-notifications"
-# watch:
-#  projects:
-#    - Job-Dsl
-#    - junk
-#  threshold: SUCCESS
 topic:
   build:
     before:
@@ -23,6 +18,10 @@ develop:
     run:
       - shell: 'kitchen test --destroy always'
 master:
+  watch:
+    projects:
+      - ./develop-to-master
+    threshold: SUCCESS
   build:
     before:
       - shell: 'knife ssl fetch'
