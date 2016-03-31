@@ -1,14 +1,17 @@
 version: 0.1.{{build}}
-environment: kitchenci
 description: ''
 slack: "#cookbook-notifications"
 topic:
+  environment: kitchenci
+  init:
+    - shell: 'echo "pre-build step"'
   build:
     before:
     - shell: 'foodcritic -X -f correctness .'
     run:
     - shell: 'kitchen test --destroy always'
 develop:
+  environment: kitchenci
   build:
     before:
       - shell: 'git config user.email "jenkins@email.com"'
@@ -24,6 +27,7 @@ develop:
       secure: VVtyCE7rnct2zJa6+L4lDWOpVcczwwdWoTalXTPb2jk=
     GOOGLE: 'http://google.com'
 master:
+  environment: kitchenci
   watch:
     projects:
       - ./develop-to-master
