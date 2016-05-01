@@ -3,8 +3,6 @@ description: ''
 slack: "#cookbook-notifications"
 topic:
   environment: kitchenci
-  init:
-    - shell: 'echo "pre-build step"'
   build:
     before:
     - shell: 'foodcritic -X -f correctness .'
@@ -12,6 +10,8 @@ topic:
     - shell: 'kitchen test --destroy always'
 develop:
   environment: kitchenci
+  init:
+    - shell: 'sudo apt-get install nodejs embercli phantomjs -y'
   build:
     before:
       - shell: 'git config user.email "jenkins@email.com"'
