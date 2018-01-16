@@ -17,6 +17,7 @@ develop:
       - shell: 'foodcritic -X spec -f correctness .'
     run:
       - shell: 'kitchen test --destroy always'
+
   variables:
     SERVICE_USER:
       secure: CLD7Ff+AHDEa7nwHqAiRmiJr6r7J0hUxa8VbhBNW4Ho=
